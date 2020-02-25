@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<metadata xmlns="http://schemas.haulmont.com/cuba/metadata.xsd">
+    <metadata-model namespace="fiasclient"
+                    root-package="com.groupstp.fiasclient">
+        <class>com.groupstp.fiasclient.entity.FiasElement</class>
+        <class>com.groupstp.fiasclient.entity.FiasCity</class>
+        <class>com.groupstp.fiasclient.entity.FiasRegion</class>
+        <class>com.groupstp.fiasclient.entity.FiasHouse</class>
+    </metadata-model>
+</metadata>

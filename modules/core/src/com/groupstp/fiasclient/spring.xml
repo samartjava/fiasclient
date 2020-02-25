@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd"
+       xmlns:context="http://www.springframework.org/schema/context">
+    <!-- Annotation-based beans -->
+    <context:component-scan base-package="com.groupstp.fiasclient"/>
+    <bean id="cubaDataSource_fiasFnsDs"
+          class="com.haulmont.cuba.core.sys.CubaJndiObjectFactoryBean">
+        <property name="jndiNameAppProperty"
+                  value="cuba.dataSourceJndiName_fiasFnsDs"/>
+        <property name="resourceRef"
+                  value="true"/>
+    </bean>
+    <bean id="entityManagerFactory_fiasFnsDs"
+          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+          lazy-init="false">
+        <property name="persistenceXmlLocation"
+                  value="file:${cuba.dataDir}/fiasFnsDs-persistence.xml"/>
+        <property name="dataSource"
+                  ref="cubaDataSource_fiasFnsDs"/>
+        <property name="jpaVendorAdapter"
+                  ref="jpaVendorAdapter"/>
+    </bean>
+    <bean id="transactionManager_fiasFnsDs"
+          class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory"
+                  ref="entityManagerFactory_fiasFnsDs"/>
+        <property name="dataSource"
+                  ref="cubaDataSource_fiasFnsDs"/>
+        <qualifier type="org.springframework.beans.factory.annotation.Qualifier"
+                   value="fiasFnsDs"/>
+    </bean>
+</beans>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://caption"
+        class="com.groupstp.fiasclient.web.screens.Datafromfias"
+        messagesPack="com.groupstp.fiasclient.web.screens">
+    <dsContext>
+        <collectionDatasource id="fiasRegionsDs"
+                              allowCommit="false"
+                              class="com.groupstp.fiasclient.entity.FiasRegion"
+                              refreshMode="NEVER"/>
+        <collectionDatasource id="fiasCitiesDs"
+                              allowCommit="false"
+                              class="com.groupstp.fiasclient.entity.FiasCity"
+                              refreshMode="NEVER"/>
+        <groupDatasource id="fiasHousesDs"
+                         allowCommit="false"
+                         class="com.groupstp.fiasclient.entity.FiasHouse"
+                         refreshMode="NEVER"/>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="addressesTbl">
+        <lookupField id="regionsLkf"
+                     caption="msg://regionName"
+                     property="name"
+                     width="100%"/>
+        <lookupField id="citiesLkf"
+                     caption="msg://cityName"
+                     property="name"
+                     width="100%"/>
+        <groupTable id="addressesTbl"
+                    caption="msg://tableName"
+                    width="100%">
+            <columns>
+                <column id="fiasId"/>
+                <column id="cityFiasId"/>
+                <column id="postalCode"/>
+                <column id="address"/>
+                <column id="houseNum"/>
+                <column id="buildNum"/>
+                <column id="strucNum"/>
+            </columns>
+            <rows datasource="fiasHousesDs"/>
+            <rowsCount/>
+        </groupTable>
+    </layout>
+</window>
