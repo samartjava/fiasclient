@@ -58,8 +58,7 @@ house as(SELECT h.houseguid AS houseId,
 JOIN r ON h.aoguid = r.aoguid
 WHERE r.actstatus = 1
 	and h.enddate >= current_date
-	and h.eststatus in (0, 2, 3)
-	and r.cityFiasId = ?parentId)
+	and h.eststatus in (0, 2, 3))
 
 
 SELECT * FROM house

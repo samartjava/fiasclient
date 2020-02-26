@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<app-component xmlns="http://schemas.haulmont.com/cuba/app-component.xsd"
+               dependsOn="com.haulmont.cuba">
+    <module blocks="*"
+            name="global">
+        <artifact appJar="true"
+                  name="fiasclient-global"/>
+        <property name="cuba.persistenceConfig"
+                  value="+com/groupstp/fiasclient/persistence.xml"/>
+        <property name="cuba.metadataConfig"
+                  value="+com/groupstp/fiasclient/metadata.xml"/>
+        <property name="cuba.viewsConfig"
+                  value="+com/groupstp/fiasclient/views.xml"/>
+        <property name="cuba.persistenceConfig_fiasFnsDs"
+                  value="com/groupstp/fiasclient/fiasFnsDs-persistence.xml"/>
+        <property name="cuba.additionalStores"
+                  value="fiasFnsDs"/>
+    </module>
+    <module blocks="core"
+            dependsOn="global"
+            name="core">
+        <artifact appJar="true"
+                  name="fiasclient-core"/>
+        <property name="cuba.springContextConfig"
+                  value="+com/groupstp/fiasclient/spring.xml"/>
+        <property name="cuba.mainMessagePack"
+                  value="+com.groupstp.fiasclient.core"/>
+    </module>
+    <module blocks="web"
+            dependsOn="global"
+            name="web">
+        <artifact appJar="true"
+                  name="fiasclient-web"/>
+        <artifact classifier="web"
+                  configuration="webcontent"
+                  ext="zip"
+                  name="fiasclient-web"/>
+        <property name="cuba.springContextConfig"
+                  value="+com/groupstp/fiasclient/web-spring.xml"/>
+        <property name="cuba.dispatcherSpringContextConfig"
+                  value="+com/groupstp/fiasclient/web-dispatcher-spring.xml"/>
+        <property name="cuba.windowConfig"
+                  value="+com/groupstp/fiasclient/web-screens.xml"/>
+        <property name="cuba.menuConfig"
+                  value="+com/groupstp/fiasclient/web-menu.xml"/>
+        <property name="cuba.permissionConfig"
+                  value="+com/groupstp/fiasclient/web-permissions.xml"/>
+        <property name="cuba.mainMessagePack"
+                  value="+com.groupstp.fiasclient.web"/>
+    </module>
+</app-component>

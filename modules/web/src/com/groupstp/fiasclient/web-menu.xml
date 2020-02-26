@@ -2,6 +2,7 @@
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
     <menu id="application-fiasclient"
           insertBefore="administration">
-        <item screen="dataFromFias"/>
     </menu>
+    <item insertBefore="sys$Category.browse"
+          screen="dataFromFias"/>
 </menu-config>
