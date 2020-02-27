@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service(FiasService.NAME)
 public class FiasServiceBean implements FiasService {
@@ -114,5 +116,33 @@ public class FiasServiceBean implements FiasService {
             pair = new Pair<>(result[0].toString(), result[1].toString());
         }
         return pair;
+    }
+
+    @Override
+    public List<FiasCity> getListQuantityFiasHousesByRegion(String regionFiasId) {
+        List<FiasCity> values = new ArrayList<>();
+        String regionCode = getRedionCode(regionFiasId);
+        String sqlString = resources.getResourceAsString("com/groupstp/fiasclient/core/sql/get-count-fias-addresses-by-region.sql")
+                .replace("***house***", "house" + regionCode);
+        final List<Object[]> resultList = persistence.callInTransaction(fiasConfig.getDataStoreName(), em ->
+                em.createNativeQuery(sqlString)
+                        .setParameter("parentId", regionFiasId)
+                        .getResultList());
+        for (Object[] result : resultList) {
+            if (result[0] != null) {
+                FiasCity fiasCity = dataManager.create(FiasCity.class);
+                fiasCity.setFiasId(result[0].toString());
+                fiasCity.setName(result[1].toString());
+                fiasCity.setQuantityOfHouses(new Long(result[2].toString()));
+                values.add(fiasCity);
+            }
+        }
+        return values;
+    }
+
+    @Override
+    public List<FiasCity> getListQuantityFiasHousesByRegion(FiasRegion fiasRegion) {
+        String cityRegionId = fiasRegion.getFiasId();
+        return getListQuantityFiasHousesByRegion(cityRegionId);
     }
 }

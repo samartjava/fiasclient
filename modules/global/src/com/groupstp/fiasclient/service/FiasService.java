@@ -6,6 +6,7 @@ import com.groupstp.fiasclient.entity.FiasHouse;
 import com.groupstp.fiasclient.entity.FiasRegion;
 
 import java.util.List;
+import java.util.Map;
 
 public interface FiasService {
     String NAME = "fiasclient_FiasService";
@@ -35,6 +36,7 @@ public interface FiasService {
 
     /**
      * возвращает List домов из БД ФИАС по городу
+     *
      * @param cityFiasId фиасID города
      * @return список домов
      */
@@ -42,8 +44,25 @@ public interface FiasService {
 
     /**
      * возвращает List домов из БД ФИАС по городу
+     *
      * @param fiasCity город
      * @return список домов
      */
     List<FiasHouse> getListFiasHouseByCity(FiasCity fiasCity);
+
+    /**
+     * возвращает Map количества домов из БД ФИАС по региону
+     *
+     * @param regionFiasId фиасID региона
+     * @return
+     */
+    List<FiasCity> getListQuantityFiasHousesByRegion(String regionFiasId);
+
+    /**
+     * возвращает Map количества домов из БД ФИАС по региону
+     *
+     * @param fiasRegion регион
+     * @return
+     */
+    List<FiasCity> getListQuantityFiasHousesByRegion(FiasRegion fiasRegion);
 }

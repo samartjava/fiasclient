@@ -9,9 +9,12 @@ import com.haulmont.cuba.gui.components.GroupTable;
 import com.haulmont.cuba.gui.components.LookupField;
 import com.haulmont.cuba.gui.data.CollectionDatasource;
 import com.haulmont.cuba.gui.data.GroupDatasource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public class Datafromfias extends AbstractWindow {
@@ -30,6 +33,8 @@ public class Datafromfias extends AbstractWindow {
     private CollectionDatasource<FiasCity, UUID> fiasCitiesDs;
     @Inject
     private GroupDatasource<FiasHouse, UUID> fiasHousesDs;
+
+    private static final Logger log = LoggerFactory.getLogger(Datafromfias.class);
 
     @Override
     public void ready() {
